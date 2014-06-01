@@ -11,7 +11,7 @@ foreach($shows as $show) {
 		$available_shows[$show['showid']] = $show;
 }
 
-heder('Content-type: text/plain');
+header('Content-type: text/plain');
 
 if(count($available_shows) > 0) {
 	echo 'Showtime! :D', PHP_EOL, PHP_EOL;
