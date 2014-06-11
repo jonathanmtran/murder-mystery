@@ -41,18 +41,20 @@ class ShowsProvider {
 					$showid = (int)$option->getAttribute('value');
 
 					// Extract information about show
-					preg_match('/(.+) @ (.+) - Theme: (.+)SOLD OUT/', $option->nodeValue, $matches);
+					preg_match('/(.+) @ (.+) - Theme: (.+)| SOLD OUT./', $option->nodeValue, $matches);
 
 					// Just in case something gets funky
 					if(count($matches) != 4)
 						continue;
+
+					$soldout = $option->getAttribute('disabled');
 
 					$shows[] = array(
 						'showid' => $showid,
 						'date' => $matches[1],
 						'time' => $matches[2],
 						'theme' => $matches[3],
-						'soldout' => $option->getAttribute('disabled') == 'disabled' ? true : false,
+						'soldout' => strlen($soldout) > 0 ? 1 : 0,
 						'raw' => $option->nodeValue,
 					);
 				}
